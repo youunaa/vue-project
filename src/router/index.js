@@ -5,6 +5,7 @@ import Dashboard from '@/views/dashboard/dashboard-main'
 import Left from '@/components/layout/Left'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import Test from '@/views/test/test-main'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,13 @@ const routes = [
       header: Header,
       default: Dashboard,
       footer: Footer
+    }
+  },
+  {
+    path: '/test',
+    name: 'test',
+    components: {
+      default: Test
     }
   },
 ]
