@@ -41,7 +41,7 @@
         <div class="row">
           <div class="col-lg-12">
             <!-- sample data -->
-            <dashboard-example3 />
+            <dashboard-log />
             <!-- // sample data -->
           </div>
         </div>
@@ -54,12 +54,10 @@
 import dashboardTotal from "@/views/dashboard/components/dashboard-total";
 import dashboardNoti from "@/views/dashboard/components/dashboard-noti";
 import dashboardDaily from "@/views/dashboard/components/dashboard-daily";
-import dashboardExample from "@/views/dashboard/components/dashboard-example";
 import dashboardCpu from "@/views/dashboard/components/dashboard-cpu";
 import dashboardMemorySize from "@/views/dashboard/components/dashboard-memory-size";
 import dashboardMemoryTotal from "@/views/dashboard/components/dashboard-memory-total";
-import dashboardExample2 from "@/views/dashboard/components/dashboard-example2";
-import dashboardExample3 from "@/views/dashboard/components/dashboard-example3";
+import dashboardLog from "@/views/dashboard/components/dashboard-log";
 import Stomp from 'webstomp-client';
 import SockJS from 'sockjs-client';
 
@@ -68,9 +66,7 @@ export default {
     dashboardTotal,
     dashboardNoti,
     dashboardDaily,
-    dashboardExample,
-    dashboardExample2,
-    dashboardExample3,
+    dashboardLog,
     dashboardCpu,
     dashboardMemorySize,
     dashboardMemoryTotal
