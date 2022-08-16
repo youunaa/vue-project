@@ -85,7 +85,7 @@ export default {
   created() {
     // 소켓 연결
     this.connect();
-    setInterval(this.send, 5000);
+    // setInterval(this.send, 5000);
   },
   methods: {
     connect() {

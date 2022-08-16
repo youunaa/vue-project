@@ -3,14 +3,6 @@
     <h2>WebSocket Test</h2>
     <div id="output">
 
-      <div>
-        <md-progress-spinner md-mode="determinate" :md-value="amount"></md-progress-spinner>
-        <md-progress-spinner class="md-accent" md-mode="determinate" :md-value="amount"></md-progress-spinner>
-        <div>
-          <input type="range" v-model.number="amount"> {{ amount }}%
-        </div>
-      </div>
-
       <Progress :radius="50" :strokeWidth="10" :value="cpuVal">
         <template v-slot:footer>
           <b>CPU Usage</b>
@@ -54,6 +46,7 @@
 import Stomp from 'webstomp-client'
 import SockJS from 'sockjs-client'
 import Progress from "easy-circular-progress";
+import axios from 'axios'
 
 export default {
   name: 'test-main',
@@ -74,11 +67,18 @@ export default {
   },
   created() {
     // 소켓 연결
-    this.connect();
-    setInterval(this.send, 5000);
+    // this.connect();
+    this.reqPrometheuns();
+    // setInterval(this.send, 5000);
   },
   methods: {
-
+    reqPrometheuns() {
+      console.log('hi');
+      axios.get('http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total[5m]')
+        .then(response => {
+          console.log(response.data.data.result)
+        })
+    },
     connect() {
       const serverURL = "http://localhost:8080";
       let socket = new SockJS(serverURL);
