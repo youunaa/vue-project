@@ -11,28 +11,29 @@
         </div>
         <div class="row">
           <div class="col-lg-4">
+            <dashboard-cpu />
+          </div>
+          <div class="col-lg-4">
+            <dashboard-memory-size />
+          </div>
+          <div class="col-lg-4">
+            <dashboard-memory-total />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
             <!-- noti -->
             <dashboard-noti />
             <!-- // noti -->
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <!-- Daily Sales -->
             <dashboard-daily />
             <!-- // Daily Sales -->
           </div>
-          <div class="col-lg-4">
-            <!-- Completed Tasks -->
-            <dashboard-example />
-            <!-- // Completed Tasks -->
-          </div>
         </div>
         <div class="row">
-          <div class="col-lg-6 col-md-12">
-            <!--  -->
-            <dashboard-example2 />
-            <!--  -->
-          </div>
-          <div class="col-lg-6 col-md-12">
+          <div class="col-lg-12">
             <!-- sample data -->
             <dashboard-example3 />
             <!-- // sample data -->
@@ -48,6 +49,9 @@ import dashboardTotal from "@/views/dashboard/components/dashboard-total";
 import dashboardNoti from "@/views/dashboard/components/dashboard-noti";
 import dashboardDaily from "@/views/dashboard/components/dashboard-daily";
 import dashboardExample from "@/views/dashboard/components/dashboard-example";
+import dashboardCpu from "@/views/dashboard/components/dashboard-cpu";
+import dashboardMemorySize from "@/views/dashboard/components/dashboard-memory-size";
+import dashboardMemoryTotal from "@/views/dashboard/components/dashboard-memory-total";
 import dashboardExample2 from "@/views/dashboard/components/dashboard-example2";
 import dashboardExample3 from "@/views/dashboard/components/dashboard-example3";
 
@@ -59,6 +63,9 @@ export default {
     dashboardExample,
     dashboardExample2,
     dashboardExample3,
+    dashboardCpu,
+    dashboardMemorySize,
+    dashboardMemoryTotal
   },
 };
 </script>

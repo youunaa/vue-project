@@ -2,10 +2,6 @@
   <div>
     <h2>WebSocket Test</h2>
     <div id="output">
-      유저이름:
-      <input type="text" v-model="userName">
-      내용:
-      <input type="text" v-model="message" @keyup="sendMessage">
 
       <div>
         <md-progress-spinner md-mode="determinate" :md-value="amount"></md-progress-spinner>
@@ -15,17 +11,17 @@
         </div>
       </div>
 
-      <Progress :radius="50" :strokeWidth="10" value="86.12">
+      <Progress :radius="50" :strokeWidth="10" :value="cpuVal">
         <template v-slot:footer>
-          <b>Bolder & Bigger One</b>
+          <b>CPU Usage</b>
         </template>
       </Progress>
 
       <Progress
-        :transitionDuration="5000"
         :radius="50"
         :strokeWidth="10"
-        value="86.12"
+        :value="memorySize"
+        :transitionDuration="5000"
       >
         <template v-slot:footer>
           <b>Slow One</b>
@@ -36,7 +32,7 @@
         :transitionDuration="5000"
         :radius="55"
         :strokeWidth="10"
-        value="86.12567"
+        :value="memoryTotal"
       >
         <template v-slot:footer>
           <b>More Precise</b>
@@ -66,7 +62,10 @@ export default {
   },
   data() {
     return {
-      amount:20,
+      cpuVal: 0,
+      memorySize: 0,
+      memoryTotal: 0,
+      amount: 20,
       userName: "",
       message: "",
       recvList: [],
@@ -76,7 +75,7 @@ export default {
   created() {
     // 소켓 연결
     this.connect();
-    // setInterval(this.send, 5000);
+    setInterval(this.send, 5000);
   },
   methods: {
 
@@ -100,7 +99,11 @@ export default {
 
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
             this.recvList.push(JSON.parse(res.body));
-            console.log('test...' , res.body)
+
+            const obj = JSON.parse(res.body);
+            this.cpuVal = obj.cpuVal;
+            this.memorySize = obj.memorySize;
+            this.memoryTotal = obj.memoryTotal;
           });
         },
         error => {
