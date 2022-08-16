@@ -44,6 +44,40 @@
     </div>
     <div class="card-body">
       <div class="chart-area">
+        <Progress :radius="50" :strokeWidth="10" value="86.12">
+          <template v-slot:footer>
+            <b>Bolder & Bigger One</b>
+          </template>
+        </Progress>
+
+        <Progress
+          :transitionDuration="5000"
+          :radius="50"
+          :strokeWidth="10"
+          value="86.12"
+        >
+          <template v-slot:footer>
+            <b>Slow One</b>
+          </template>
+        </Progress>
+
+        <Progress
+          :transitionDuration="5000"
+          :radius="55"
+          :strokeWidth="10"
+          value="86.12567"
+        >
+          <template v-slot:footer>
+            <b>More Precise</b>
+          </template>
+        </Progress>
+
+        <Progress :transitionDuration="5000" :radius="55" :strokeWidth="10" value="86.12567">
+          <div class="content">86/100</div>
+          <template v-slot:footer>
+            <b>More Precise</b>
+          </template>
+        </Progress>
         <canvas id="chartBig1"></canvas>
       </div>
     </div>
@@ -51,11 +85,15 @@
 </template>
 
 <script>
+import Progress from 'easy-circular-progress';
+
 export default {
   data() {
     return {};
   },
-
+  components: {
+    Progress
+  },
   methods: {},
 };
 </script>

@@ -7,9 +7,48 @@
       내용:
       <input type="text" v-model="message" @keyup="sendMessage">
 
-      <div v-for="(item, idx) in recvList" :key="idx" >
-        <strong style="font-size: 20px; color: white">{{ item.userName }}</strong> 님 : <strong>{{ item.content }}</strong>
+      <div>
+        <md-progress-spinner md-mode="determinate" :md-value="amount"></md-progress-spinner>
+        <md-progress-spinner class="md-accent" md-mode="determinate" :md-value="amount"></md-progress-spinner>
+        <div>
+          <input type="range" v-model.number="amount"> {{ amount }}%
+        </div>
       </div>
+
+      <Progress :radius="50" :strokeWidth="10" value="86.12">
+        <template v-slot:footer>
+          <b>Bolder & Bigger One</b>
+        </template>
+      </Progress>
+
+      <Progress
+        :transitionDuration="5000"
+        :radius="50"
+        :strokeWidth="10"
+        value="86.12"
+      >
+        <template v-slot:footer>
+          <b>Slow One</b>
+        </template>
+      </Progress>
+
+      <Progress
+        :transitionDuration="5000"
+        :radius="55"
+        :strokeWidth="10"
+        value="86.12567"
+      >
+        <template v-slot:footer>
+          <b>More Precise</b>
+        </template>
+      </Progress>
+
+      <Progress :transitionDuration="5000" :radius="55" :strokeWidth="10" value="86.12567">
+        <div class="content">86/100</div>
+        <template v-slot:footer>
+          <b>More Precise</b>
+        </template>
+      </Progress>
 
     </div>
   </div>
@@ -18,19 +57,26 @@
 <script>
 import Stomp from 'webstomp-client'
 import SockJS from 'sockjs-client'
+import Progress from "easy-circular-progress";
 
 export default {
-  name: 'test-main'
-  , data() {
+  name: 'test-main',
+  components: {
+    Progress
+  },
+  data() {
     return {
+      amount:20,
       userName: "",
       message: "",
-      recvList: []
+      recvList: [],
+      metricList: []
     }
   },
   created() {
     // 소켓 연결
     this.connect();
+    // setInterval(this.send, 5000);
   },
   methods: {
 
@@ -53,7 +99,8 @@ export default {
             console.log('구독으로 받은 메시지 입니다.', res.body);
 
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
-            this.recvList.push(JSON.parse(res.body))
+            this.recvList.push(JSON.parse(res.body));
+            console.log('test...' , res.body)
           });
         },
         error => {
@@ -85,3 +132,8 @@ export default {
   }
 };
 </script>
+<style>
+.md-progress-spinner {
+  margin: 24px;
+}
+</style>
