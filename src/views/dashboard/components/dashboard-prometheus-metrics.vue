@@ -51,9 +51,10 @@ export default {
               zeroLineColor: "transparent",
             },
             ticks: {
-              suggestedMin: 50,
+              // min:20,
+              // suggestedMin: 50,
               // suggestedMax: 125,
-              padding: 20,
+              // padding: 20,
               fontColor: "#9e9e9e"
             }
           }],
@@ -65,6 +66,8 @@ export default {
               zeroLineColor: "transparent",
             },
             ticks: {
+              // stepSize:10,
+              autoSkipPadding: 40,
               padding: 20,
               fontColor: "#9e9e9e"
             }
@@ -84,9 +87,11 @@ export default {
       axios.get('http://34.125.109.178:9090/api/v1/query_range?query=process_open_fds&start=1660646731.242&end=1660650331.242&step=14&_=1660650330889')
         .then(response => {
           response.data.data.result[0].values.forEach((cell, index) => {
-            this.chart_labels.push(cell[1])
-            this.chart_data.push(cell[10])
+            this.chart_labels.push(cell[1]);
+            const date = new Date(cell[0] * 1000);
+            this.chart_data.push(date.getHours() + ':' + date.getMinutes())
           });
+
           // chart 그리기
           this.drawChart();
         })
@@ -108,7 +113,7 @@ export default {
       var data = {
         labels: chart_labels,
         datasets: [{
-          label: "My First dataset",
+          label: "process_open_fds",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: '#00d6b4',

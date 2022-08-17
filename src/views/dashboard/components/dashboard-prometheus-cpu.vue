@@ -16,7 +16,7 @@
             >
               <input type="radio" name="options" checked/>
               <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                5 minutes
+                1 hours
               </span>
               <span class="d-block d-sm-none">
                 <i class="tim-icons icon-single-02"></i>
@@ -28,7 +28,7 @@
             >
               <input type="radio" class="d-none d-sm-none" name="options"/>
               <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                1 hours
+                5 minutes
               </span>
               <span class="d-block d-sm-none">
                 <i class="tim-icons icon-gift-2"></i>
@@ -77,7 +77,7 @@ export default {
       type2Class: 'btn btn-sm btn-primary btn-simple',
       type3Class: 'btn btn-sm btn-primary btn-simple',
       url: 'http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total',
-      duration: '5m',
+      duration: '1h',
       gradientChartOptionsConfigurationWithTooltipPurple: {
         maintainAspectRatio: false,
         legend: {
@@ -103,8 +103,8 @@ export default {
               zeroLineColor: "transparent",
             },
             ticks: {
-              suggestedMin: 60,
-              suggestedMax: 5, // y축 max
+              // suggestedMin: 60,
+              // suggestedMax: 5, // y축 max
               padding: 20,
               fontColor: "#9a9a9a"
             }
@@ -117,7 +117,8 @@ export default {
               zeroLineColor: "transparent",
             },
             ticks: {
-              padding: 20,
+              autoSkipPadding:40,
+              // padding: 20,
               fontColor: "#9a9a9a"
             }
           }]
@@ -125,7 +126,7 @@ export default {
       }
     };
   },
-  mounted() {
+  created() {
     this.reqPrometheus();
   },
   components: {
@@ -148,14 +149,15 @@ export default {
         this.type2Class = this.btnClass;
         this.type3Class = this.btnActiveClass;
       }
-      this.reqPrometheus();
+      // this.reqPrometheus()
     },
     reqPrometheus() {
       axios.get(this.url + '[' + this.duration + ']')
         .then(response => {
           response.data.data.result[0].values.forEach((cell, index) => {
-            this.chart_labels.push(cell[1])
-            this.chart_data.push(cell[10])
+            this.chart_labels.push(cell[1]);
+            const date = new Date(cell[0] * 1000);
+            this.chart_data.push(date.getHours() + ':' + date.getMinutes());
           });
           // chart 그리기
           this.drawChart();
@@ -180,7 +182,7 @@ export default {
         data: {
           labels: chart_labels,
           datasets: [{
-            label: "My First dataset",
+            label: "process_cpu_seconds_total",
             fill: true,
             backgroundColor: gradientStroke,
             borderColor: '#d346b1',
@@ -193,7 +195,7 @@ export default {
             pointBorderWidth: 20,
             pointHoverRadius: 4,
             pointHoverBorderWidth: 15,
-            pointRadius: 4,
+            pointRadius: 1,
             data: chart_data,
           }]
         },
@@ -201,6 +203,7 @@ export default {
       };
 
       var myChartData = new Chart(ctx, config);
+
       // $("#0").click(function () {
       //   var data = myChartData.config.data;
       //   data.datasets[0].data = chart_data;
@@ -209,11 +212,7 @@ export default {
       // });
       //
       // $("#1").click(function () {
-      //   var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
-      //   var data = myChartData.config.data;
-      //   data.datasets[0].data = chart_data;
-      //   data.labels = chart_labels;
-      //   myChartData.update();
+      //
       // });
       //
       // $("#2").click(function () {
