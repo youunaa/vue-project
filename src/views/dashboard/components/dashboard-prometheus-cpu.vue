@@ -9,37 +9,40 @@
           <h4 class="card-category">process_cpu_seconds_total</h4>
         </div>
         <div class="col-sm-6">
-          <div
-            class="btn-group btn-group-toggle float-right"
-            data-toggle="buttons"
-          >
-            <label class="btn btn-sm btn-primary btn-simple active" id="0">
+          <div class="btn-group btn-group-toggle float-right" data-toggle="buttons" >
+
+            <label id="0" :class="type1Class"
+              @click="btnClick('1')"
+            >
               <input type="radio" name="options" checked/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-              >Accounts</span
-              >
+              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                5 minutes
+              </span>
               <span class="d-block d-sm-none">
                 <i class="tim-icons icon-single-02"></i>
               </span>
             </label>
-            <label class="btn btn-sm btn-primary btn-simple" id="1">
+
+            <label :class="type2Class" id="1" @click="btnClick('2')">
               <input type="radio" class="d-none d-sm-none" name="options"/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-              >Purchases</span
-              >
+              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                1 hours
+              </span>
               <span class="d-block d-sm-none">
                 <i class="tim-icons icon-gift-2"></i>
               </span>
             </label>
-            <label class="btn btn-sm btn-primary btn-simple" id="2">
+
+            <label :class="type3Class" id="2" @click="btnClick('3')">
               <input type="radio" class="d-none" name="options"/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block"
-              >Sessions</span
-              >
+              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" >
+                100 hours
+              </span>
               <span class="d-block d-sm-none">
                 <i class="tim-icons icon-tap-02"></i>
               </span>
             </label>
+
           </div>
         </div>
       </div>
@@ -64,6 +67,13 @@ export default {
       Chart,
       chart_labels: [],
       chart_data: [],
+      btnClass:'btn btn-sm btn-primary btn-simple',
+      btnActiveClass:'btn btn-sm btn-primary btn-simple active',
+      type1Class:'btn btn-sm btn-primary btn-simple active',
+      type2Class:'btn btn-sm btn-primary btn-simple',
+      type3Class:'btn btn-sm btn-primary btn-simple',
+      url: 'http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total',
+      duration: '5m',
       gradientChartOptionsConfigurationWithTooltipPurple: {
         maintainAspectRatio: false,
         legend: {
@@ -112,15 +122,34 @@ export default {
     };
   },
   mounted() {
-    this.reqPrometheus();
+    this.reqPrometheus(this.duration);
     this.drawChart();
   },
   components: {
     Progress
   },
   methods: {
+    btnClick(btnType) {
+      if(btnType === '1') {
+        this.type1Class = this.btnActiveClass;
+        this.type2Class = this.btnClass;
+        this.type3Class = this.btnClass;
+      }
+      if(btnType === '2') {
+        this.type1Class = this.btnClass;
+        this.type2Class = this.btnActiveClass;
+        this.type3Class = this.btnClass;
+      }
+      if(btnType === '3') {
+        this.type1Class = this.btnClass;
+        this.type2Class = this.btnClass;
+        this.type3Class = this.btnActiveClass;
+      }
+      this.reqPrometheus();
+      this.drawChart();
+    },
     reqPrometheus() {
-      axios.get('http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total[5m]')
+      axios.get(this.url + '[' + this.duration + ']')
         .then(response => {
           response.data.data.result[0].values.forEach((cell, index) => {
             this.chart_labels.push(cell[1])
@@ -141,6 +170,7 @@ export default {
       gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
       gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
       gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+
       var config = {
         type: 'line',
         data: {
@@ -165,28 +195,30 @@ export default {
         },
         options: this.gradientChartOptionsConfigurationWithTooltipPurple
       };
-      var myChartData = new Chart(ctx, config);
-      $("#0").click(function () {
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
-        data.labels = chart_labels;
-        myChartData.update();
-      });
-      $("#1").click(function () {
-        var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
-        data.labels = chart_labels;
-        myChartData.update();
-      });
 
-      $("#2").click(function () {
-        var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
-        var data = myChartData.config.data;
-        data.datasets[0].data = chart_data;
-        data.labels = chart_labels;
-        myChartData.update();
-      });
+      var myChartData = new Chart(ctx, config);
+      // $("#0").click(function () {
+      //   var data = myChartData.config.data;
+      //   data.datasets[0].data = chart_data;
+      //   data.labels = chart_labels;
+      //   myChartData.update();
+      // });
+      //
+      // $("#1").click(function () {
+      //   var chart_data = [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120];
+      //   var data = myChartData.config.data;
+      //   data.datasets[0].data = chart_data;
+      //   data.labels = chart_labels;
+      //   myChartData.update();
+      // });
+      //
+      // $("#2").click(function () {
+      //   var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
+      //   var data = myChartData.config.data;
+      //   data.datasets[0].data = chart_data;
+      //   data.labels = chart_labels;
+      //   myChartData.update();
+      // });
     }
   },
 };

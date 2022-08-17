@@ -4,7 +4,7 @@
       <div class="content">
         <div class="row">
           <div class="col-12">
-            <dashboard-prometheus-cpu />
+            <dashboard-prometheus-cpu/>
           </div>
         </div>
         <div class="row">
@@ -26,16 +26,16 @@
         </div>
         <div class="row">
           <div class="col-lg-8">
-            <dashboard-prometheus-metrics />
+            <dashboard-prometheus-metrics/>
           </div>
           <div class="col-lg-4">
-            <dashboard-jvm-metrics />
+            <dashboard-jvm-metrics/>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <!-- sample data -->
-            <dashboard-log />
+            <dashboard-log/>
             <!-- // sample data -->
           </div>
         </div>
