@@ -1,8 +1,11 @@
 <template>
   <div class="card card-chart">
     <div class="card-header">
-      <h5 class="card-category">Completed Tasks</h5>
-      <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> 12,100K</h3>
+      <h3 class="card-title">
+        <i class="tim-icons icon-send text-success"></i>
+        Prometheus Metrics
+      </h3>
+      <h4 class="card-category">process_open_fds</h4>
     </div>
     <div class="card-body">
       <div class="chart-area">
@@ -80,6 +83,7 @@ export default {
   methods: {
     reqPrometheus() {
       axios.get('http://34.125.109.178:9090/api/v1/query_range?query=process_open_fds&start=1660646731.242&end=1660650331.242&step=14&_=1660650330889')
+      // axios.get('http://34.125.109.178:9090/api/v1/query_range?query=process_open_fds&start=1660646731.242&end=1660650331.242&step=14&_=1660650330889')
         .then(response => {
           response.data.data.result[0].values.forEach((cell, index) => {
             this.chart_labels.push(cell[1])
@@ -117,7 +121,7 @@ export default {
           pointBorderWidth: 20,
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
-          pointRadius: 4,
+          pointRadius: 1,
           data: chart_data,
         }]
       };

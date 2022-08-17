@@ -4,38 +4,32 @@
       <div class="content">
         <div class="row">
           <div class="col-12">
-            <!-- total -->
-            <dashboard-total />
-            <!-- //total -->
+            <dashboard-prometheus-cpu />
           </div>
         </div>
         <div class="row">
           <div class="col-lg-4">
-            <dashboard-cpu
+            <dashboard-jvm-cpu
               :value="cpuVal"
             />
           </div>
           <div class="col-lg-4">
-            <dashboard-memory-size
+            <dashboard-jvm-memory-size
               :value="memorySize"
             />
           </div>
           <div class="col-lg-4">
-            <dashboard-memory-total
+            <dashboard-jvm-memory-total
               :value="memoryTotal"
             />
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-6">
-            <!-- noti -->
-            <dashboard-noti />
-            <!-- // noti -->
+          <div class="col-lg-8">
+            <dashboard-prometheus-metrics />
           </div>
-          <div class="col-lg-6">
-            <!-- Daily Sales -->
-            <dashboard-daily />
-            <!-- // Daily Sales -->
+          <div class="col-lg-4">
+            <dashboard-jvm-metrics />
           </div>
         </div>
         <div class="row">
@@ -51,25 +45,25 @@
 </template>
 
 <script>
-import dashboardTotal from "@/views/dashboard/components/dashboard-total";
-import dashboardNoti from "@/views/dashboard/components/dashboard-noti";
-import dashboardDaily from "@/views/dashboard/components/dashboard-daily";
-import dashboardCpu from "@/views/dashboard/components/dashboard-cpu";
-import dashboardMemorySize from "@/views/dashboard/components/dashboard-memory-size";
-import dashboardMemoryTotal from "@/views/dashboard/components/dashboard-memory-total";
+import dashboardPrometheusCpu from "@/views/dashboard/components/dashboard-prometheus-cpu";
+import dashboardJvmCpu from "@/views/dashboard/components/dashboard-jvm-cpu";
+import dashboardJvmMemorySize from "@/views/dashboard/components/dashboard-jvm-memory-size";
+import dashboardJvmMemoryTotal from "@/views/dashboard/components/dashboard-jvm-memory-total";
+import dashboardJvmMetrics from "@/views/dashboard/components/dashboard-jvm-metrics";
+import dashboardPrometheusMetrics from "@/views/dashboard/components/dashboard-prometheus-metrics";
 import dashboardLog from "@/views/dashboard/components/dashboard-log";
 import Stomp from 'webstomp-client';
 import SockJS from 'sockjs-client';
 
 export default {
   components: {
-    dashboardTotal,
-    dashboardNoti,
-    dashboardDaily,
+    dashboardPrometheusCpu,
+    dashboardJvmMetrics,
     dashboardLog,
-    dashboardCpu,
-    dashboardMemorySize,
-    dashboardMemoryTotal
+    dashboardPrometheusMetrics,
+    dashboardJvmCpu,
+    dashboardJvmMemorySize,
+    dashboardJvmMemoryTotal
   },
   data() {
     return {

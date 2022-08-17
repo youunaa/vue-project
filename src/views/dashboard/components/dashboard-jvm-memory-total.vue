@@ -1,9 +1,11 @@
 <template>
   <div class="card card-chart">
     <div class="card-header">
-      <h4 class="card-title">
-        <i class="tim-icons icon-send text-success"></i>  사용 가능한 물리적 메모리의 양(byte)
-      </h4>
+      <h3 class="card-title">
+        <i class="tim-icons icon-send text-success"></i>
+        JVM(Java Virtual Machine) Metrics
+      </h3>
+      <h4 class="card-category">Returns the total amount of physical memory in bytes.</h4>
     </div>
     <div class="card-body">
       <Progress :radius="50" :strokeWidth="10" :value="value">

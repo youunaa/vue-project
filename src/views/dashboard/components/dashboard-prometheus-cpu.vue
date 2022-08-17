@@ -3,8 +3,10 @@
     <div class="card-header ">
       <div class="row">
         <div class="col-sm-6 text-left">
-          <h5 class="card-category">Total Shipments</h5>
-          <h2 class="card-title">Performance</h2>
+          <h3 class="card-title">
+            <i class="tim-icons icon-send text-primary"></i> Prometheus Metircs
+          </h3>
+          <h4 class="card-category">process_cpu_seconds_total</h4>
         </div>
         <div class="col-sm-6">
           <div

@@ -1,11 +1,11 @@
 <template>
   <div class="card card-chart">
     <div class="card-header">
-      <h5 class="card-category">Daily Sales</h5>
       <h3 class="card-title">
         <i class="tim-icons icon-delivery-fast text-info"></i>
-        3,500€
+        Java System Metrics
       </h3>
+      <h4 class="card-category">Average</h4>
     </div>
     <div class="card-body">
       <div class="chart-area">
@@ -87,7 +87,7 @@ export default {
           display: false
         },
         data: {
-          labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
+          labels: ['CPU', 'Memory Size', 'Memory Total'],
           datasets: [{
             label: "Countries",
             fill: true,
@@ -97,7 +97,7 @@ export default {
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [53, 20, 10, 80, 100, 45],
+            data: [53, 20, 10],
           }]
         },
         options: this.gradientBarChartConfiguration
