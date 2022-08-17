@@ -9,10 +9,10 @@
           <h4 class="card-category">process_cpu_seconds_total</h4>
         </div>
         <div class="col-sm-6">
-          <div class="btn-group btn-group-toggle float-right" data-toggle="buttons" >
+          <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
 
             <label id="0" :class="type1Class"
-              @click="btnClick('1')"
+                   @click="btnClick('1')"
             >
               <input type="radio" name="options" checked/>
               <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
@@ -23,7 +23,9 @@
               </span>
             </label>
 
-            <label :class="type2Class" id="1" @click="btnClick('2')">
+            <label :class="type2Class" id="1"
+                   @click="btnClick('2')"
+            >
               <input type="radio" class="d-none d-sm-none" name="options"/>
               <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                 1 hours
@@ -33,9 +35,11 @@
               </span>
             </label>
 
-            <label :class="type3Class" id="2" @click="btnClick('3')">
+            <label :class="type3Class" id="2"
+                   @click="btnClick('3')"
+            >
               <input type="radio" class="d-none" name="options"/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block" >
+              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                 100 hours
               </span>
               <span class="d-block d-sm-none">
@@ -67,11 +71,11 @@ export default {
       Chart,
       chart_labels: [],
       chart_data: [],
-      btnClass:'btn btn-sm btn-primary btn-simple',
-      btnActiveClass:'btn btn-sm btn-primary btn-simple active',
-      type1Class:'btn btn-sm btn-primary btn-simple active',
-      type2Class:'btn btn-sm btn-primary btn-simple',
-      type3Class:'btn btn-sm btn-primary btn-simple',
+      btnClass: 'btn btn-sm btn-primary btn-simple',
+      btnActiveClass: 'btn btn-sm btn-primary btn-simple active',
+      type1Class: 'btn btn-sm btn-primary btn-simple active',
+      type2Class: 'btn btn-sm btn-primary btn-simple',
+      type3Class: 'btn btn-sm btn-primary btn-simple',
       url: 'http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total',
       duration: '5m',
       gradientChartOptionsConfigurationWithTooltipPurple: {
@@ -122,31 +126,29 @@ export default {
     };
   },
   mounted() {
-    this.reqPrometheus(this.duration);
-    this.drawChart();
+    this.reqPrometheus();
   },
   components: {
     Progress
   },
   methods: {
     btnClick(btnType) {
-      if(btnType === '1') {
+      if (btnType === '1') {
         this.type1Class = this.btnActiveClass;
         this.type2Class = this.btnClass;
         this.type3Class = this.btnClass;
       }
-      if(btnType === '2') {
+      if (btnType === '2') {
         this.type1Class = this.btnClass;
         this.type2Class = this.btnActiveClass;
         this.type3Class = this.btnClass;
       }
-      if(btnType === '3') {
+      if (btnType === '3') {
         this.type1Class = this.btnClass;
         this.type2Class = this.btnClass;
         this.type3Class = this.btnActiveClass;
       }
       this.reqPrometheus();
-      this.drawChart();
     },
     reqPrometheus() {
       axios.get(this.url + '[' + this.duration + ']')
@@ -155,6 +157,8 @@ export default {
             this.chart_labels.push(cell[1])
             this.chart_data.push(cell[10])
           });
+          // chart 그리기
+          this.drawChart();
         })
     },
     drawChart() {

@@ -75,7 +75,6 @@ export default {
   },
   mounted() {
     this.reqPrometheus();
-    this.drawChart();
   },
   components: {
     Progress
@@ -83,12 +82,13 @@ export default {
   methods: {
     reqPrometheus() {
       axios.get('http://34.125.109.178:9090/api/v1/query_range?query=process_open_fds&start=1660646731.242&end=1660650331.242&step=14&_=1660650330889')
-      // axios.get('http://34.125.109.178:9090/api/v1/query_range?query=process_open_fds&start=1660646731.242&end=1660650331.242&step=14&_=1660650330889')
         .then(response => {
           response.data.data.result[0].values.forEach((cell, index) => {
             this.chart_labels.push(cell[1])
             this.chart_data.push(cell[10])
           });
+          // chart 그리기
+          this.drawChart();
         })
     },
     drawChart() {
