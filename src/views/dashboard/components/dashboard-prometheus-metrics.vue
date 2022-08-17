@@ -19,6 +19,7 @@
 import Chart from "chart.js";
 import Progress from 'easy-circular-progress';
 import axios from "axios";
+import moment from 'moment';
 
 export default {
   data() {
@@ -26,6 +27,8 @@ export default {
       Chart,
       chart_labels: [],
       chart_data: [],
+      startTime: '',
+      endTime: '',
       gradientChartOptionsConfigurationWithTooltipGreen: {
         maintainAspectRatio: false,
         legend: {
@@ -77,6 +80,10 @@ export default {
     };
   },
   mounted() {
+    var travelTime = moment().add(-1, 'hours').format('yyyy-MM-DD hh:mm:ss');
+    const date = new Date(travelTime);
+    this.startTime = date.getTime(); // 1시간전
+    this.endTime = Date.now(); // 햔재
     this.reqPrometheus();
   },
   components: {

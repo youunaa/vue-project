@@ -17,6 +17,7 @@
     "chartjs-plugin-datasource-prometheus": "^1.0.11",
     "easy-circular-progress": "^1.0.4",
     "jquery": "^3.6.0",
+    "moment": "^2.29.4",
     "react-customizable-progressbar": "^1.1.0",
     "vue": "^2.7.8",
     "vue-material": "^1.0.0-beta-15",
