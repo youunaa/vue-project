@@ -111,7 +111,7 @@ export default {
         data: {
           labels: ['CPU', 'Memory Size', 'Memory Total'],
           datasets: [{
-            label: "Countries",
+            label: "Usage",
             fill: true,
             backgroundColor: gradientStroke,
             hoverBackgroundColor: gradientStroke,
