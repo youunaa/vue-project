@@ -17,11 +17,13 @@
 
 <script>
 import Chart from "chart.js";
+import api from '@/api';
 
 export default {
   data() {
     return {
       Chart,
+      chart_data:[0,0,0],
       gradientBarChartConfiguration : {
         maintainAspectRatio: false,
         legend: {
@@ -46,8 +48,8 @@ export default {
               zeroLineColor: "transparent",
             },
             ticks: {
-              suggestedMin: 60,
-              suggestedMax: 120,
+              // suggestedMin: 60,
+              // suggestedMax: 120,
               padding: 20,
               fontColor: "#9e9e9e"
             }
@@ -68,13 +70,33 @@ export default {
     };
   },
   mounted() {
-    this.drawChart();
+    this.reqMetricData();
   },
   methods: {
+    reqMetricData() {
+      api.get('metric/total')
+        .then(response => {
+          if(response.data.body.cpuAvg !== undefined && response.data.body.cpuAvg !== '' && response.data.body.cpuAvg !== null) {
+            const num = Number(response.data.body.cpuAvg)
+            this.chart_data[0] = num.toFixed(2);
+          }
+          if(response.data.body.memorySizeAvg !== undefined && response.data.body.memorySizeAvg !== '' && response.data.body.memorySizeAvg !== null) {
+            const num = Number(response.data.body.memorySizeAvg)
+            this.chart_data[1] = num.toFixed(2);
+          }
+          if(response.data.body.memoryTotalAvg !== undefined && response.data.body.memoryTotalAvg !== '' && response.data.body.memoryTotalAvg !== null) {
+            const num = Number(response.data.body.memoryTotalAvg)
+            this.chart_data[2] = num.toFixed(2);
+          }
+          // chart 그리기
+          this.drawChart();
+        })
+    },
     drawChart() {
       const ctx = this.$refs.lineChart.getContext("2d");
 
       var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+      var chart_data = this.chart_data;
 
       gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
       gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
@@ -97,7 +119,7 @@ export default {
             borderWidth: 2,
             borderDash: [],
             borderDashOffset: 0.0,
-            data: [53, 20, 10],
+            data: chart_data,
           }]
         },
         options: this.gradientBarChartConfiguration
