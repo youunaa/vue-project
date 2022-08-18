@@ -23,8 +23,8 @@ export default {
   data() {
     return {
       Chart,
-      chart_data:[0,0,0],
-      gradientBarChartConfiguration : {
+      chart_data: [0, 0, 0],
+      gradientBarChartConfiguration: {
         maintainAspectRatio: false,
         legend: {
           display: false
@@ -76,15 +76,15 @@ export default {
     reqMetricData() {
       api.get('metric/total')
         .then(response => {
-          if(response.data.body.cpuAvg !== undefined && response.data.body.cpuAvg !== '' && response.data.body.cpuAvg !== null) {
+          if (response.data.body.cpuAvg !== undefined && response.data.body.cpuAvg !== '' && response.data.body.cpuAvg !== null) {
             const num = Number(response.data.body.cpuAvg)
             this.chart_data[0] = num.toFixed(2);
           }
-          if(response.data.body.memorySizeAvg !== undefined && response.data.body.memorySizeAvg !== '' && response.data.body.memorySizeAvg !== null) {
+          if (response.data.body.memorySizeAvg !== undefined && response.data.body.memorySizeAvg !== '' && response.data.body.memorySizeAvg !== null) {
             const num = Number(response.data.body.memorySizeAvg)
             this.chart_data[1] = num.toFixed(2);
           }
-          if(response.data.body.memoryTotalAvg !== undefined && response.data.body.memoryTotalAvg !== '' && response.data.body.memoryTotalAvg !== null) {
+          if (response.data.body.memoryTotalAvg !== undefined && response.data.body.memoryTotalAvg !== '' && response.data.body.memoryTotalAvg !== null) {
             const num = Number(response.data.body.memoryTotalAvg)
             this.chart_data[2] = num.toFixed(2);
           }
