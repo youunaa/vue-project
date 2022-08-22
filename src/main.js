@@ -13,7 +13,7 @@ Vue.use(MdTabs);
 
 Vue.use(new VueSocketIO({
   debug: true,
-  connection: 'http://34.125.109.178:8082',
+  connection: 'http://34.125.40.125:8082',
   options: {path: "/"}, //Optional options
   vuex: {
     store,

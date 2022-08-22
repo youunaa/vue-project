@@ -76,7 +76,7 @@ export default {
       type1Class: 'btn btn-sm btn-primary btn-simple active',
       type2Class: 'btn btn-sm btn-primary btn-simple',
       type3Class: 'btn btn-sm btn-primary btn-simple',
-      url: 'http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total',
+      url: 'http://34.125.40.125:9090/api/v1/query?query=process_cpu_seconds_total',
       duration: '1h',
       gradientChartOptionsConfigurationWithTooltipPurple: {
         maintainAspectRatio: false,

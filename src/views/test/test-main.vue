@@ -73,13 +73,13 @@ export default {
   },
   methods: {
     reqPrometheuns() {
-      axios.get('http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total[5m]')
+      axios.get('http://34.125.40.125:9090/api/v1/query?query=process_cpu_seconds_total[5m]')
         .then(response => {
           console.log(response.data.data.result)
         })
     },
     connect() {
-      const serverURL = "http://34.125.109.178:8082";
+      const serverURL = "http://34.125.40.125:8082";
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
 

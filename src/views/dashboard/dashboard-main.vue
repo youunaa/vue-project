@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     connect() {
-      const serverURL = "http://34.125.109.178:8082";
+      const serverURL = "http://34.125.40.125:8082";
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
 
