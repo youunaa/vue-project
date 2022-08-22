@@ -73,7 +73,6 @@ export default {
   },
   methods: {
     reqPrometheuns() {
-      console.log('hi');
       axios.get('http://34.125.109.178:9090/api/v1/query?query=process_cpu_seconds_total[5m]')
         .then(response => {
           console.log(response.data.data.result)

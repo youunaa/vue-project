@@ -35,7 +35,7 @@
         <div class="row">
           <div class="col-lg-12">
             <!-- sample data -->
-            <dashboard-log/>
+<!--            <dashboard-log/>-->
             <!-- // sample data -->
           </div>
         </div>

@@ -23,29 +23,29 @@
               </span>
             </label>
 
-            <label :class="type2Class" id="1"
-                   @click="btnClick('2')"
-            >
-              <input type="radio" class="d-none d-sm-none" name="options"/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                5 minutes
-              </span>
-              <span class="d-block d-sm-none">
-                <i class="tim-icons icon-gift-2"></i>
-              </span>
-            </label>
+<!--            <label :class="type2Class" id="1"-->
+<!--                   @click="btnClick('2')"-->
+<!--            >-->
+<!--              <input type="radio" class="d-none d-sm-none" name="options"/>-->
+<!--              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">-->
+<!--                5 minutes-->
+<!--              </span>-->
+<!--              <span class="d-block d-sm-none">-->
+<!--                <i class="tim-icons icon-gift-2"></i>-->
+<!--              </span>-->
+<!--            </label>-->
 
-            <label :class="type3Class" id="2"
-                   @click="btnClick('3')"
-            >
-              <input type="radio" class="d-none" name="options"/>
-              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                100 hours
-              </span>
-              <span class="d-block d-sm-none">
-                <i class="tim-icons icon-tap-02"></i>
-              </span>
-            </label>
+<!--            <label :class="type3Class" id="2"-->
+<!--                   @click="btnClick('3')"-->
+<!--            >-->
+<!--              <input type="radio" class="d-none" name="options"/>-->
+<!--              <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">-->
+<!--                100 hours-->
+<!--              </span>-->
+<!--              <span class="d-block d-sm-none">-->
+<!--                <i class="tim-icons icon-tap-02"></i>-->
+<!--              </span>-->
+<!--            </label>-->
 
           </div>
         </div>
